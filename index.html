@@ -242,7 +242,7 @@
       font-size: 0.95rem;
     }
 
-    /* Formspree Booking Section */
+    /* Booking Form Section */
     .booking-section {
       background: #141414;
       border: 1px solid #262626;
@@ -293,25 +293,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
-    }
-
-    /* Formspree State Displays */
-    [data-fs-success] {
-      display: none;
-      background: rgba(40, 167, 69, 0.2);
-      border: 1px solid #28a745;
-      color: #28a745;
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: 600;
-    }
-    [data-fs-error] {
-      color: #ff4d4d;
-      font-size: 0.85rem;
-      margin-top: 4px;
-      display: block;
     }
 
     /* Footer */
@@ -434,49 +415,43 @@
       </div>
     </div>
 
-    <!-- Booking Form Section Integrated with Formspree -->
+    <!-- Booking Form Section Integrated with Formspree Endpoint -->
     <section class="booking-section" id="order">
       <h2>Book Your Stage Package</h2>
       <p>Submit your event details and video links below to arrange stage processing.</p>
 
-      <div data-fs-success>Thank you! Your stage request has been received. We will get back to you shortly.</div>
-      <div data-fs-error></div>
-
-      <form id="qrally-form">
+      <form action="https://formspree.io/f/mljeawgb" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name / Crew Name</label>
-            <input type="text" id="name" name="name" class="form-control" required data-fs-field />
-            <span data-fs-error="name"></span>
+            <input type="text" id="name" name="name" class="form-control" required />
           </div>
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" class="form-control" required data-fs-field />
-            <span data-fs-error="email"></span>
+            <input type="email" id="email" name="email" class="form-control" required />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="package">Package Selected</label>
-            <select id="package" name="package" class="form-control" data-fs-field>
+            <select id="package" name="package" class="form-control">
               <option value="Full Event Package (£75)">Full Event Package (£75)</option>
               <option value="Single Stage Pack (£12.50)">Single Stage Pack (£12.50 / stage)</option>
             </select>
           </div>
           <div class="form-group">
             <label for="event_name">Rally / Event Name</label>
-            <input type="text" id="event_name" name="event_name" class="form-control" placeholder="e.g. Hills Ford Rally" data-fs-field />
+            <input type="text" id="event_name" name="event_name" class="form-control" placeholder="e.g. Hills Ford Rally" />
           </div>
         </div>
 
         <div class="form-group">
           <label for="message">Event Notes & Video File Links (WeTransfer / Drive)</label>
-          <textarea id="message" name="message" class="form-control" placeholder="Provide details on stage names, number of stages, or paste your WeTransfer/Dropbox link..." data-fs-field required></textarea>
-          <span data-fs-error="message"></span>
+          <textarea id="message" name="message" class="form-control" placeholder="Provide details on stage names, number of stages, or paste your WeTransfer/Dropbox link..." required></textarea>
         </div>
 
-        <button type="submit" class="cta-button" style="width: 100%;" data-fs-submit-btn>Submit Event Order</button>
+        <button type="submit" class="cta-button" style="width: 100%;">Submit Event Order</button>
       </form>
     </section>
 
@@ -485,15 +460,9 @@
   <!-- Footer -->
   <footer>
     <p>&copy; 2026 QRally Pace Note Studio. All rights reserved.</p>
+    <p>Contact: <a href="mailto:sales@rallye-historique.co.uk">sales@rallye-historique.co.uk</a></p>
     <p>Powered by RODGE Automotive</p>
   </footer>
-
-  <!-- Formspree AJAX SDK Scripts -->
-  <script>
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#qrally-form', formId: 'mgolwvyd' });
-  </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
