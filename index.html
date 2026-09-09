@@ -53,7 +53,7 @@
       color: #aaa;
       font-size: 0.85rem;
       font-weight: 600;
-      white-space: nowrap; /* Prevents text like "How It Works" from splitting */
+      white-space: nowrap;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #ffcc00; text-decoration: none; }
@@ -99,6 +99,8 @@
       border-radius: 6px;
       font-size: 1rem;
       display: inline-block;
+      border: none;
+      cursor: pointer;
       transition: transform 0.15s, background 0.15s;
     }
     .cta-button:hover {
@@ -240,23 +242,76 @@
       font-size: 0.95rem;
     }
 
-    /* Contact / Booking Box */
+    /* Formspree Booking Section */
     .booking-section {
       background: #141414;
       border: 1px solid #262626;
       border-radius: 10px;
       padding: 40px;
-      text-align: center;
-      margin-bottom: 60px;
+      max-width: 700px;
+      margin: 0 auto 60px auto;
     }
     .booking-section h2 {
       color: #fff;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      text-align: center;
     }
     .booking-section p {
       color: #aaa;
-      max-width: 600px;
-      margin: 0 auto 25px auto;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      color: #ccc;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: #ffcc00;
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Formspree State Displays */
+    [data-fs-success] {
+      display: none;
+      background: rgba(40, 167, 69, 0.2);
+      border: 1px solid #28a745;
+      color: #28a745;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+    [data-fs-error] {
+      color: #ff4d4d;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      display: block;
     }
 
     /* Footer */
@@ -284,12 +339,13 @@
       .hero h1 { font-size: 2.1rem; }
       .hero p { font-size: 1rem; }
       .booking-section { padding: 25px; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Clean, Non-wrapping Mobile Navigation Header -->
+  <!-- Navigation Header -->
   <header>
     <div class="nav-container">
       <div class="brand-logo">Q<span>RALLY</span></div>
@@ -339,7 +395,7 @@
           <li>High-contrast yellow/black readability banner</li>
           <li>Standard SRT timing file included</li>
           <li>Fast digital delivery (MP4 format)</li>
-          <li>Optimised for tablet & phone playback</li>
+          <li>Optimized for tablet & phone playback</li>
         </ul>
         <a href="#order" class="cta-button" style="text-align: center;">Order Single Stage</a>
       </div>
@@ -365,24 +421,63 @@
     <h2 class="section-title" id="how-it-works">How The Service Works</h2>
     <div class="grid">
       <div class="card">
-        <h3>1. Submit Your Footage</h3>
-        <p>Upload your raw GoPro or dashcam recce video via WeTransfer or Google Drive alongside your stage distance notes or dictation.</p>
+        <h3>1. Submit Your Details</h3>
+        <p>Fill in the booking form below with your event details, stage count, and links to your raw GoPro or dashcam recce video files.</p>
       </div>
       <div class="card">
         <h3>2. Precision Studio Tagging</h3>
-        <p>Using our proprietary QRally Studio workflow, we log and align every call to match exact stage positions down to the fraction of a second.</p>
+        <p>Using our proprietary QRally Studio workflow, we log and align every call to match exact stage positions down to the millisecond.</p>
       </div>
       <div class="card">
         <h3>3. Direct Delivery</h3>
-        <p>Receive your rendered 4K/HD video files directly to your phone or tablet, ready to press play during event prep—no software setup required.</p>
+        <p>Receive your rendered HD/4K video files directly to your phone or tablet, ready to press play during event prep—no software required.</p>
       </div>
     </div>
 
-    <!-- Booking / Order CTA -->
+    <!-- Booking Form Section Integrated with Formspree -->
     <section class="booking-section" id="order">
-      <h2>Get Your Stage Pack Prepared</h2>
-      <p>Have an upcoming event or want a trial stage processed for your team? Get in touch with our team to arrange file transfers and stage scheduling.</p>
-      <a href="mailto:contact@qrally.co.uk?subject=QRally%20Stage%20Video%20Inquiry" class="cta-button">Email Your Event Details</a>
+      <h2>Book Your Stage Package</h2>
+      <p>Submit your event details and video links below to arrange stage processing.</p>
+
+      <div data-fs-success>Thank you! Your stage request has been received. We will get back to you shortly.</div>
+      <div data-fs-error></div>
+
+      <form id="qrally-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name / Crew Name</label>
+            <input type="text" id="name" name="name" class="form-control" required data-fs-field />
+            <span data-fs-error="name"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" required data-fs-field />
+            <span data-fs-error="email"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="package">Package Selected</label>
+            <select id="package" name="package" class="form-control" data-fs-field>
+              <option value="Full Event Package (£75)">Full Event Package (£75)</option>
+              <option value="Single Stage Pack (£12.50)">Single Stage Pack (£12.50 / stage)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="event_name">Rally / Event Name</label>
+            <input type="text" id="event_name" name="event_name" class="form-control" placeholder="e.g. Hills Ford Rally" data-fs-field />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Event Notes & Video File Links (WeTransfer / Drive)</label>
+          <textarea id="message" name="message" class="form-control" placeholder="Provide details on stage names, number of stages, or paste your WeTransfer/Dropbox link..." data-fs-field required></textarea>
+          <span data-fs-error="message"></span>
+        </div>
+
+        <button type="submit" class="cta-button" style="width: 100%;" data-fs-submit-btn>Submit Event Order</button>
+      </form>
     </section>
 
   </div>
@@ -392,6 +487,13 @@
     <p>&copy; 2026 QRally Pace Note Studio. All rights reserved.</p>
     <p>Powered by RODGE Automotive</p>
   </footer>
+
+  <!-- Formspree AJAX SDK Scripts -->
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#qrally-form', formId: 'mgolwvyd' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
