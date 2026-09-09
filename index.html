@@ -17,11 +17,11 @@
     a { color: #ffcc00; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Navigation */
+    /* Clean Responsive Navigation Header */
     header {
       background: #141414;
       border-bottom: 1px solid #262626;
-      padding: 15px 20px;
+      padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -32,6 +32,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .brand-logo {
       font-size: 1.4rem;
@@ -40,14 +42,28 @@
       color: #fff;
     }
     .brand-logo span { color: #ffcc00; }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
     .nav-links a {
       color: #aaa;
-      margin-left: 20px;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      white-space: nowrap; /* Prevents text like "How It Works" from splitting */
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #ffcc00; text-decoration: none; }
+    .nav-links a.nav-cta {
+      background: #ffcc00;
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
 
     /* Main Container */
     .container {
@@ -59,7 +75,7 @@
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 40px 0 50px 0;
+      padding: 30px 0 50px 0;
     }
     .hero h1 {
       font-size: 2.8rem;
@@ -132,7 +148,7 @@
     /* Pricing Section */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
       margin-bottom: 60px;
     }
@@ -204,7 +220,7 @@
     /* Features Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
       margin-bottom: 60px;
     }
@@ -254,8 +270,17 @@
     }
     footer p { margin-bottom: 5px; }
 
-    /* Responsive Tweaks */
-    @media (max-width: 768px) {
+    /* Mobile Header Layout Adjustments */
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        justify-content: center;
+        gap: 10px 14px;
+        width: 100%;
+      }
       .hero h1 { font-size: 2.1rem; }
       .hero p { font-size: 1rem; }
       .booking-section { padding: 25px; }
@@ -264,15 +289,15 @@
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Clean, Non-wrapping Mobile Navigation Header -->
   <header>
     <div class="nav-container">
       <div class="brand-logo">Q<span>RALLY</span></div>
       <nav class="nav-links">
-        <a href="#services">Services & Pricing</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#demo">Sample Stage</a>
-        <a href="#order">Book Event</a>
+        <a href="#services">Pricing</a>
+        <a href="#how-it-works">Process</a>
+        <a href="#demo">Sample</a>
+        <a href="#order" class="nav-cta">Book Event</a>
       </nav>
     </div>
   </header>
@@ -283,7 +308,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <h1>Custom Stage Video Packages.<br><span>Turnkey Pace Note Overlays.</span></h1>
-      <p>Send us your raw recce footage or paper note notes. We deliver high-definition, millisecond-accurate video packs ready for instant driver & co-driver stage review.</p>
+      <p>Send us your raw recce footage or paper notes. We deliver high-definition, millisecond-accurate video packs ready for instant driver & co-driver stage review.</p>
       <a href="#services" class="cta-button">View Service Pricing</a>
     </section>
 
@@ -341,7 +366,7 @@
     <div class="grid">
       <div class="card">
         <h3>1. Submit Your Footage</h3>
-        <p>Upload your raw GoPro or dashcam recce video via wetransfer or Google Drive alongside your stage distance notes or dictation.</p>
+        <p>Upload your raw GoPro or dashcam recce video via WeTransfer or Google Drive alongside your stage distance notes or dictation.</p>
       </div>
       <div class="card">
         <h3>2. Precision Studio Tagging</h3>
