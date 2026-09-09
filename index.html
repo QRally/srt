@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QRally | Pace Note Studio</title>
+  <title>QRally | Precision Stage Note Video Service</title>
   <style>
     /* Base Styles & Reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,7 +59,7 @@
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 40px 0 60px 0;
+      padding: 40px 0 50px 0;
     }
     .hero h1 {
       font-size: 2.8rem;
@@ -105,7 +105,7 @@
       padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
       height: 0;
     }
-    .video-wrapper video, .video-wrapper iframe {
+    .video-wrapper iframe {
       position: absolute;
       top: 0;
       left: 0;
@@ -114,14 +114,94 @@
       border: 0;
     }
 
-    /* Features Grid */
+    /* Section Headers */
     .section-title {
       font-size: 1.8rem;
       color: #fff;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 10px;
       font-weight: 700;
     }
+    .section-subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    /* Pricing Section */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+    .pricing-card {
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 10px;
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border: 2px solid #ffcc00;
+      background: #181818;
+    }
+    .badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: #ffcc00;
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .pricing-card h3 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+    .price span {
+      font-size: 0.9rem;
+      color: #888;
+      font-weight: normal;
+    }
+    .pricing-card p {
+      color: #aaa;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 25px;
+      flex-grow: 1;
+    }
+    .pricing-features li {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .pricing-features li::before {
+      content: "✓";
+      color: #ffcc00;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    /* Features Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -144,30 +224,23 @@
       font-size: 0.95rem;
     }
 
-    /* Showcase Gallery (Your Screenshots) */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-    .gallery-item {
+    /* Contact / Booking Box */
+    .booking-section {
       background: #141414;
       border: 1px solid #262626;
-      border-radius: 8px;
-      overflow: hidden;
+      border-radius: 10px;
+      padding: 40px;
       text-align: center;
+      margin-bottom: 60px;
     }
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-bottom: 1px solid #262626;
+    .booking-section h2 {
+      color: #fff;
+      margin-bottom: 15px;
     }
-    .gallery-item p {
-      padding: 12px;
-      font-size: 0.85rem;
-      color: #888;
+    .booking-section p {
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto 25px auto;
     }
 
     /* Footer */
@@ -185,6 +258,7 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.1rem; }
       .hero p { font-size: 1rem; }
+      .booking-section { padding: 25px; }
     }
   </style>
 </head>
@@ -195,8 +269,10 @@
     <div class="nav-container">
       <div class="brand-logo">Q<span>RALLY</span></div>
       <nav class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#demo">Demo</a>
+        <a href="#services">Services & Pricing</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#demo">Sample Stage</a>
+        <a href="#order">Book Event</a>
       </nav>
     </div>
   </header>
@@ -206,14 +282,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <h1>Precision Stage Note Overlays.<br><span>Zero Render Lag.</span></h1>
-      <p>Tag your recce video using instant voice dictation, export a lightweight SRT timing file, and apply production-ready overlays in seconds.</p>
-      <a href="#demo" class="cta-button">Watch Intro Video</a>
+      <h1>Custom Stage Video Packages.<br><span>Turnkey Pace Note Overlays.</span></h1>
+      <p>Send us your raw recce footage or paper note notes. We deliver high-definition, millisecond-accurate video packs ready for instant driver & co-driver stage review.</p>
+      <a href="#services" class="cta-button">View Service Pricing</a>
     </section>
 
     <!-- Web Intro Video Section -->
     <section class="video-section" id="demo">
-      <!-- YouTube Embed -->
       <div class="video-wrapper">
         <iframe 
           src="https://www.youtube.com/embed/efMECwDmQnE" 
@@ -224,22 +299,66 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-    <h2 class="section-title" id="features">Built for Grassroots Motorsport</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>🎙️ Rally Voice Dictation</h3>
-        <p>Built-in speech-to-text parser converts voice commands like "200 flat crest" or "left 3 over brow" directly into standardised pace note syntax.</p>
+    <!-- Services & Pricing Section -->
+    <h2 class="section-title" id="services">Proprietary Service Packages</h2>
+    <p class="section-subtitle">Professional stage video preparation tailored for rally crews and motor clubs.</p>
+
+    <div class="pricing-grid">
+      <!-- Per Stage Package -->
+      <div class="pricing-card">
+        <h3>Per Stage Pack</h3>
+        <div class="price">£12.50 <span>/ stage</span></div>
+        <p>Ideal for single stage previews, test venue reviews, or targeted recce verification.</p>
+        <ul class="pricing-features">
+          <li>Precision-timed pace note overlay</li>
+          <li>High-contrast yellow/black readability banner</li>
+          <li>Standard SRT timing file included</li>
+          <li>Fast digital delivery (MP4 format)</li>
+          <li>Optimized for tablet & phone playback</li>
+        </ul>
+        <a href="#order" class="cta-button" style="text-align: center;">Order Single Stage</a>
       </div>
-      <div class="card">
-        <h3>⏱️ Precision SRT Export</h3>
-        <p>Skip laggy browser canvas rendering. Export millisecond-accurate SRT timing files that import seamlessly.</p>
-      </div>
-      <div class="card">
-        <h3>⚡ Full Hardware Power</h3>
-        <p>By pairing with dedicated mobile editors, utilize your phone or computer's full GPU hardware acceleration to render clean 4K MP4 exports.</p>
+
+      <!-- Full Event Package -->
+      <div class="pricing-card featured">
+        <div class="badge">Best Value</div>
+        <h3>Full Event Package</h3>
+        <div class="price">£75.00 <span>/ event</span></div>
+        <p>Complete stage video preparation covering an entire 6 to 8 stage rally event.</p>
+        <ul class="pricing-features">
+          <li>Full event coverage (up to 8 stages)</li>
+          <li>High-visibility overlay styling</li>
+          <li>Master SRT package for co-driver digital note readers</li>
+          <li>Priority turnaround before event recce window</li>
+          <li>Dedicated cloud download folder</li>
+        </ul>
+        <a href="#order" class="cta-button" style="text-align: center;">Book Full Event Pack</a>
       </div>
     </div>
+
+    <!-- How It Works Section -->
+    <h2 class="section-title" id="how-it-works">How The Service Works</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Submit Your Footage</h3>
+        <p>Upload your raw GoPro or dashcam recce video via wetransfer or Google Drive alongside your stage distance notes or dictation.</p>
+      </div>
+      <div class="card">
+        <h3>2. Precision Studio Tagging</h3>
+        <p>Using our proprietary QRally Studio workflow, we log and align every call to match exact stage positions down to the fraction of a second.</p>
+      </div>
+      <div class="card">
+        <h3>3. Direct Delivery</h3>
+        <p>Receive your rendered 4K/HD video files directly to your phone or tablet, ready to press play during event prep—no software setup required.</p>
+      </div>
+    </div>
+
+    <!-- Booking / Order CTA -->
+    <section class="booking-section" id="order">
+      <h2>Get Your Stage Pack Prepared</h2>
+      <p>Have an upcoming event or want a trial stage processed for your team? Get in touch with our team to arrange file transfers and stage scheduling.</p>
+      <a href="mailto:contact@qrally.co.uk?subject=QRally%20Stage%20Video%20Inquiry" class="cta-button">Email Your Event Details</a>
+    </section>
 
   </div>
 
