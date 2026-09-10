@@ -353,7 +353,7 @@
     <section class="video-section" id="demo">
       <div class="video-wrapper">
         <iframe 
-          src="https://youtu.be/L7t7XpIE_Zg?is=ERR6dATZG347Duq-" 
+          src="https://www.youtube.com/embed/L7t7XpIE_Zg" 
           title="QRally Pace Note Studio Intro" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen>
@@ -378,7 +378,7 @@
           <li>Fast digital delivery (MP4 format)</li>
           <li>Optimized for tablet & phone playback</li>
         </ul>
-        <a href="#order" class="cta-button" style="text-align: center;">Order Single Stage</a>
+        <a href="#order" class="cta-button" style="text-align: center; display: block; width: 100%;">Order Single Stage</a>
       </div>
 
       <!-- Full Event Package -->
@@ -394,7 +394,7 @@
           <li>Priority turnaround before event recce window</li>
           <li>Dedicated cloud download folder</li>
         </ul>
-        <a href="#order" class="cta-button" style="text-align: center;">Book Full Event Pack</a>
+        <a href="#order" class="cta-button" style="text-align: center; display: block; width: 100%;">Book Full Event Pack</a>
       </div>
     </div>
 
@@ -421,8 +421,9 @@
       <p>Submit your event details and video links below to arrange stage processing.</p>
 
       <form action="https://formspree.io/f/mljeawgb" method="POST">
-    <!-- Redirect back to your site after submission -->
-  <input type="hidden" name="_next" value="https://qrally.github.io/srt/#demo" />
+        <!-- Redirect back to your site after submission -->
+        <input type="hidden" name="_next" value="https://qrally.github.io/srt/#demo" />
+        
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name / Crew Name</label>
