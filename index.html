@@ -108,6 +108,11 @@
       text-decoration: none;
       transform: translateY(-2px);
     }
+    .cta-button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     /* Video Player Container */
     .video-section {
@@ -119,17 +124,14 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
+      width: 100%;
+      aspect-ratio: 16 / 9;
     }
     .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       border: 0;
+      display: block;
     }
 
     /* Section Headers */
@@ -353,12 +355,11 @@
     <section class="video-section" id="demo">
       <div class="video-wrapper">
         <iframe 
-  src="https://www.youtube.com/embed/L7t7XpIE_Zg?modestbranding=1&rel=0&title=0" 
-  title="QRally Pace Note Studio Intro" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-
+          src="https://www.youtube.com/embed/L7t7XpIE_Zg?modestbranding=1&rel=0&title=0" 
+          title="QRally Pace Note Studio Intro" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
       </div>
     </section>
 
@@ -416,15 +417,12 @@
       </div>
     </div>
 
-    <!-- Booking Form Section Integrated with Formspree Endpoint -->
+    <!-- Booking Form Section -->
     <section class="booking-section" id="order">
       <h2>Book Your Stage Package</h2>
       <p>Submit your event details and video links below to arrange stage processing.</p>
 
-      <form action="https://formspree.io/f/mljeawgb" method="POST">
-        <!-- Redirect back to your site after submission -->
-        <input type="hidden" name="_next" value="https://qrally.github.io/srt/" />
-        
+      <form id="bookingForm" action="https://formspree.io/f/mljeawgb" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name / Crew Name</label>
@@ -455,7 +453,8 @@
           <textarea id="message" name="message" class="form-control" placeholder="Provide details on stage names, number of stages, or paste your WeTransfer/Dropbox link..." required></textarea>
         </div>
 
-        <button type="submit" class="cta-button" style="width: 100%;">Submit Event Order</button>
+        <button type="submit" id="submitBtn" class="cta-button" style="width: 100%;">Submit Event Order</button>
+        <p id="formStatus" style="text-align: center; margin-top: 15px; font-weight: bold; display: none;"></p>
       </form>
     </section>
 
@@ -467,6 +466,49 @@
     <p>Contact: <a href="mailto:sales@rallye-historique.co.uk">sales@rallye-historique.co.uk</a></p>
     <p>Powered by RODGE Automotive</p>
   </footer>
+
+  <!-- AJAX Form Handler -->
+  <script>
+    const form = document.getElementById('bookingForm');
+    const status = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending Order...';
+
+      const data = new FormData(form);
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          status.style.color = '#00ff66';
+          status.innerText = '✓ Booking received! We will be in touch shortly.';
+          status.style.display = 'block';
+          form.reset();
+          submitBtn.innerText = 'Submit Event Order';
+          submitBtn.disabled = false;
+        } else {
+          status.style.color = '#ff4444';
+          status.innerText = 'Oops! There was a problem submitting your order.';
+          status.style.display = 'block';
+          submitBtn.innerText = 'Submit Event Order';
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        status.style.color = '#ff4444';
+        status.innerText = 'Network error. Please try again.';
+        status.style.display = 'block';
+        submitBtn.innerText = 'Submit Event Order';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
